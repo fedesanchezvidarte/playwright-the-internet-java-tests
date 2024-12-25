@@ -5,7 +5,7 @@ import com.microsoft.playwright.*;
 public class BrowseFactory {
 
     private static Browser browser;
-    private static BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
+    private static final BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
     private static Playwright playwright;
 
     public static Browser getBrowser(String browserType) {
