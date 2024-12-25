@@ -2,16 +2,21 @@ package utils;
 
 import com.microsoft.playwright.*;
 
-public class BrowseFactory {
+public class BrowserFactory {
 
     private static Browser browser;
     private static final BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
     private static Playwright playwright;
 
     public static Browser getBrowser(String browserType) {
-        if (browserType == null) {
+        if (browserType != null) {
             playwright = Playwright.create();
-            options.setHeadless(true); // Default configuration: headless
+
+            // Headless mode configuration
+            String headlessProperty = ConfigReader.getProperty("headless");
+            boolean isHeadless = Boolean.parseBoolean(headlessProperty);
+            options.setHeadless(isHeadless);
+
             switch (browserType.toLowerCase()) {
                 case "firefox":
                     browser = playwright.firefox().launch(options);
