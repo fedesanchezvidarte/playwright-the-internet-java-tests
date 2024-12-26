@@ -4,39 +4,52 @@ import com.microsoft.playwright.*;
 
 public class BrowserFactory {
 
-    private static Browser browser;
-    private static final BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
-    private static Playwright playwright;
+    private static ThreadLocal<Browser> browser = new ThreadLocal<>();
+    private static ThreadLocal<Playwright> playwright = new ThreadLocal<>();
 
+    /**
+     * Retrieves or creates a Browser instance for the current thread.
+     *
+     * @param browserType The type of browser to launch (e.g., "chromium", "firefox", "webkit").
+     * @return A Browser instance.
+     */
     public static Browser getBrowser(String browserType) {
-        if (browserType != null) {
-            playwright = Playwright.create();
+        if (playwright.get() == null) {
+            playwright.set(Playwright.create());
+        }
 
-            // Headless mode configuration
-            options.setHeadless(FrameworkConfig.isHeadless());
+        if (browser.get() == null) {
+            BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
+            options.setHeadless(FrameworkConfig.isHeadless()); // Configure headless mode via FrameworkConfig
 
             switch (browserType.toLowerCase()) {
                 case "firefox":
-                    browser = playwright.firefox().launch(options);
+                    browser.set(playwright.get().firefox().launch(options));
                     break;
                 case "webkit":
-                    browser = playwright.webkit().launch(options);
+                    browser.set(playwright.get().webkit().launch(options));
                     break;
                 case "chromium":
                 default:
-                    browser = playwright.chromium().launch(options);
+                    browser.set(playwright.get().chromium().launch(options));
                     break;
             }
         }
-        return browser;
+
+        return browser.get();
     }
 
+    /**
+     * Closes the Browser and Playwright instances for the current thread.
+     */
     public static void closeBrowser() {
-        if (browser != null) {
-            browser.close();
+        if (browser.get() != null) {
+            browser.get().close();
+            browser.remove();
         }
-        if (playwright != null) {
-            playwright.close();
+        if (playwright.get() != null) {
+            playwright.get().close();
+            playwright.remove();
         }
     }
 }

@@ -1,74 +1,74 @@
 package base;
 
 import com.microsoft.playwright.*;
-import utils.*;
 import org.testng.annotations.*;
+import utils.BrowserFactory;
+import utils.FrameworkConfig;
+import utils.Logger;
+import utils.SubPage;
 
 public class BaseTest {
 
-    protected Browser browser;
-    protected BrowserContext context;
-    protected Page page;
+    private static ThreadLocal<BrowserContext> context = new ThreadLocal<>();
+    private static ThreadLocal<Page> page = new ThreadLocal<>();
 
+    /**
+     * Sets up the BrowserContext and Page for the current thread before each test class.
+     */
     @BeforeClass
     public void setup() {
         Logger.info("Starting browser setup...");
-        browser = BrowserFactory.getBrowser(FrameworkConfig.getBrowser());
-        context = browser.newContext();
-        page = context.newPage();
+        Browser browser = BrowserFactory.getBrowser(FrameworkConfig.getBrowser());
+        BrowserContext localContext = browser.newContext();
+        context.set(localContext);
+        Page localPage = localContext.newPage();
+        page.set(localPage);
         Logger.info("Browser setup complete.");
     }
 
+    /**
+     * Cleans up the BrowserContext and Browser after each test class.
+     */
     @AfterClass
     public void tearDown() {
         Logger.info("Closing browser...");
-        if (context != null) {
-            context.close();
-        }
         BrowserFactory.closeBrowser();
         Logger.info("Browser closed.");
     }
 
     /**
-     * Navigate to a specific page using the main menu text.
+     * Gets the current Page instance for the current thread.
      *
-     * @param subPage Name of the page in the menu.
+     * @return The Page instance.
      */
-    protected void navigateToPage(SubPage subPage) {
-        try {
-            // Obtain complete URL by using SubPage
-            String url = FrameworkConfig.getBaseUrl() + subPage.getRelativeUrl();
-            Logger.info("Navigating to: " + url);
-            page.navigate(url);
-        } catch (Exception e) {
-            Logger.error("Error navigating to page: " + subPage.getName());
-            throw new RuntimeException("Failed to navigate to page: " + subPage.getName(), e);
-        }
+    protected Page getPage() {
+        return page.get();
     }
 
+    /**
+     * Navigates to a specific URL relative to the base URL.
+     *
+     * @param subPage The relative URL of the page to navigate to.
+     */
+    protected void navigateToPage(SubPage subPage) {
+        String url = FrameworkConfig.getBaseUrl() + subPage.getRelativeUrl();
+        Logger.info("Navigating to: " + url);
+        getPage().navigate(url);
+    }
 
     /**
-     * Creates and returns an instance of the specified Page Object class.
+     * Creates an instance of a Page Object.
      *
-     * This method uses generics to dynamically initialize Page Object classes, ensuring
-     * type safety and flexibility. It finds the appropriate constructor that accepts a
-     * Playwright `Page` object and uses it to create the instance.
-     *
-     * @param <T> The type of the Page Object to be returned.
-     * @param pageClass The class of the Page Object to be instantiated.
-     * @return An instance of the specified Page Object class.
-     * @throws RuntimeException If the Page Object cannot be instantiated.
+     * @param pageClass The class of the Page Object.
+     * @return An instance of the specified Page Object.
      */
-    protected <T> T getPage(Class<T> pageClass) {
+    protected <T> T getPageObject(Class<T> pageClass) {
         try {
-            // Finds the constructor of the given class that accepts a Page as an argument
-            return pageClass.getDeclaredConstructor(Page.class)
-                    // Creates a new instance of the class using the Playwright Page instance
-                    .newInstance(page);
+            Logger.debug("Initializing Page Object: " + pageClass.getName());
+            return pageClass.getDeclaredConstructor(Page.class).newInstance(getPage());
         } catch (Exception e) {
-            // Throws a runtime exception with a meaningful error message if instantiation fails
+            Logger.error("Failed to initialize Page Object: " + pageClass.getName());
             throw new RuntimeException("Failed to initialize Page Object: " + pageClass.getName(), e);
         }
     }
-
 }

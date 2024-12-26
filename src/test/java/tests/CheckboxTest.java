@@ -18,7 +18,7 @@ public class CheckboxTest extends BaseTest {
     @BeforeMethod
     public void navigateToCheckboxPage() {
         navigateToPage(SubPage.CHECKBOXES);
-        checkboxPage = new CheckboxPage(page);
+        checkboxPage = getPageObject(CheckboxPage.class);
 
         // Load initial states for checkboxes
         initialStates = (List<Boolean>) TestDataManager.getSection("checkboxes").get("initialStates");

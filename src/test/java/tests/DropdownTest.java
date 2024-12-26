@@ -20,7 +20,7 @@ public class DropdownTest extends BaseTest {
     @BeforeMethod
     public void navigateToDropdownPage() {
         navigateToPage(SubPage.DROPDOWN);
-        dropdownPage = new DropdownPage(page);
+        dropdownPage = getPageObject(DropdownPage.class);
 
         // Load test data for Dropdown
         testData = TestDataManager.getSection("dropdown");

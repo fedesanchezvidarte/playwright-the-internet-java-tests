@@ -20,7 +20,7 @@ public class AddRemoveElementsTest extends BaseTest {
     public void navigateToAddRemovePage() {
         Logger.info("Navigating to Add/Remove Elements page...");
         navigateToPage(SubPage.ADD_REMOVE_ELEMENTS);
-        addRemoveElementsPage = new AddRemoveElementsPage(page);
+        addRemoveElementsPage = getPageObject(AddRemoveElementsPage.class);
 
         // Load test data for Add/Remove Elements
         testData = TestDataManager.getSection("addRemoveElements");
