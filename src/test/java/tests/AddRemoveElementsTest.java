@@ -5,7 +5,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.AddRemoveElementsPage;
+import utils.Logger;
 import utils.SubPage;
+
+import static utils.SubPage.ADD_REMOVE_ELEMENTS;
 
 public class AddRemoveElementsTest extends BaseTest {
 
@@ -13,6 +16,7 @@ public class AddRemoveElementsTest extends BaseTest {
 
     @BeforeMethod
     public void navigateToAddRemovePage() {
+        Logger.info("Navigating to Add/Remove Elements page...");
         navigateToPage(SubPage.ADD_REMOVE_ELEMENTS);
         addRemoveElementsPage = new AddRemoveElementsPage(page);
     }

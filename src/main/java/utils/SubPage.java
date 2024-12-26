@@ -60,4 +60,9 @@ public enum SubPage {
     public String getRelativeUrl() {
         return relativeUrl;
     }
+
+    @Override
+    public String toString() {
+        return name; // Returns visible text associated to ENUM
+    }
 }

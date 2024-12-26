@@ -13,9 +13,7 @@ public class BrowserFactory {
             playwright = Playwright.create();
 
             // Headless mode configuration
-            String headlessProperty = ConfigReader.getProperty("headless");
-            boolean isHeadless = Boolean.parseBoolean(headlessProperty);
-            options.setHeadless(isHeadless);
+            options.setHeadless(FrameworkConfig.isHeadless());
 
             switch (browserType.toLowerCase()) {
                 case "firefox":
