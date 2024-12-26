@@ -4,8 +4,8 @@ import com.microsoft.playwright.*;
 
 public class BrowserFactory {
 
-    private static ThreadLocal<Browser> browser = new ThreadLocal<>();
-    private static ThreadLocal<Playwright> playwright = new ThreadLocal<>();
+    private static final ThreadLocal<Browser> browser = new ThreadLocal<>();
+    private static final ThreadLocal<Playwright> playwright = new ThreadLocal<>();
 
     /**
      * Retrieves or creates a Browser instance for the current thread.

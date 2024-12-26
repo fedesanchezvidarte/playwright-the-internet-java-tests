@@ -9,8 +9,8 @@ import utils.SubPage;
 
 public class BaseTest {
 
-    private static ThreadLocal<BrowserContext> context = new ThreadLocal<>();
-    private static ThreadLocal<Page> page = new ThreadLocal<>();
+    private static final ThreadLocal<BrowserContext> context = new ThreadLocal<>();
+    private static final ThreadLocal<Page> page = new ThreadLocal<>();
 
     /**
      * Sets up the BrowserContext and Page for the current thread before each test class.
