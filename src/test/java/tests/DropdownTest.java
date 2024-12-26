@@ -6,15 +6,25 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DropdownPage;
 import utils.SubPage;
+import utils.TestDataManager;
+
+import java.util.List;
+import java.util.Map;
 
 public class DropdownTest extends BaseTest {
 
     private DropdownPage dropdownPage;
+    private Map<String, Object> testData;
+    private List<String> options;
 
     @BeforeMethod
     public void navigateToDropdownPage() {
         navigateToPage(SubPage.DROPDOWN);
         dropdownPage = new DropdownPage(page);
+
+        // Load test data for Dropdown
+        testData = TestDataManager.getSection("dropdown");
+        options = (List<String>) testData.get("options");
     }
 
     @Test
@@ -28,10 +38,12 @@ public class DropdownTest extends BaseTest {
     @Test
     public void verifyDefaultValue() {
         // Verify default value is "Please select an option"
-        String defaultOption = dropdownPage.getSelectedOptionText();
-        Assert.assertEquals(defaultOption,
-                "Please select an option",
-                "Default option should be 'Please select an option'.");
+        String defaultOptionText = dropdownPage.getSelectedOptionText();
+        String defaultValue = (String) testData.get("defaultValue");
+        Assert.assertEquals(
+                defaultOptionText,
+                defaultValue,
+                "Default option should be: " + defaultValue);
     }
 
     @Test
@@ -42,7 +54,7 @@ public class DropdownTest extends BaseTest {
         // Verify Option 1 is selected
         String selectedOption = dropdownPage.getSelectedOptionText();
         Assert.assertEquals(selectedOption,
-                "Option 1",
+                options.get(0),
                 "Option 1 should be selected");
     }
 
@@ -54,7 +66,7 @@ public class DropdownTest extends BaseTest {
         // Verify Option 2 is selected
         String selectedOption = dropdownPage.getSelectedOptionText();
         Assert.assertEquals(selectedOption,
-                "Option 2",
+                options.get(1),
                 "Option 2 should be selected");
     }
 }

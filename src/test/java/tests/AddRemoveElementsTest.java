@@ -7,18 +7,23 @@ import org.testng.annotations.Test;
 import pages.AddRemoveElementsPage;
 import utils.Logger;
 import utils.SubPage;
+import utils.TestDataManager;
 
-import static utils.SubPage.ADD_REMOVE_ELEMENTS;
+import java.util.Map;
 
 public class AddRemoveElementsTest extends BaseTest {
 
     private AddRemoveElementsPage addRemoveElementsPage;
+    private Map<String, Object> testData;
 
     @BeforeMethod
     public void navigateToAddRemovePage() {
         Logger.info("Navigating to Add/Remove Elements page...");
         navigateToPage(SubPage.ADD_REMOVE_ELEMENTS);
         addRemoveElementsPage = new AddRemoveElementsPage(page);
+
+        // Load test data for Add/Remove Elements
+        testData = TestDataManager.getSection("addRemoveElements");
     }
 
     @Test
@@ -36,8 +41,10 @@ public class AddRemoveElementsTest extends BaseTest {
 
         // Verify one "Delete" button appears
         int deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
-        Assert.assertEquals(deleteButtonCount,
-                1,
+        int initialCount = (int) testData.get("initialCount");
+        Assert.assertEquals(
+                deleteButtonCount,
+                initialCount + 1,
                 "There should be exactly 1 'Delete' button.");
 
         // Remove the "Delete" button
@@ -47,7 +54,7 @@ public class AddRemoveElementsTest extends BaseTest {
         deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
         Assert.assertEquals(
                 deleteButtonCount,
-                0,
+                initialCount,
                 "There should not be 'Delete' buttons after removal."
         );
     }
@@ -55,7 +62,7 @@ public class AddRemoveElementsTest extends BaseTest {
     @Test
     public void addRemoveMultipleElements() {
         // Click on "Add Element" multiple times
-        int numOfElements = 20;
+        int numOfElements = (int) testData.get("numOfElementsToAdd");
         for (int i = 0; i < numOfElements; i++) {
             addRemoveElementsPage.clickAddElementButton();
         }
@@ -73,9 +80,10 @@ public class AddRemoveElementsTest extends BaseTest {
 
         // Verify no "Delete" button remain
         deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
+        int initialCount = (int) testData.get("initialCount");
         Assert.assertEquals(
                 deleteButtonCount,
-                0,
+                initialCount,
                 "There should not be 'Delete' buttons after removal."
         );
     }

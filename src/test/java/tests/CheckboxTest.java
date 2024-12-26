@@ -6,24 +6,37 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.CheckboxPage;
 import utils.SubPage;
+import utils.TestDataManager;
+
+import java.util.List;
 
 public class CheckboxTest extends BaseTest {
 
     private CheckboxPage checkboxPage;
+    private List<Boolean> initialStates;
 
     @BeforeMethod
     public void navigateToCheckboxPage() {
         navigateToPage(SubPage.CHECKBOXES);
         checkboxPage = new CheckboxPage(page);
+
+        // Load initial states for checkboxes
+        initialStates = (List<Boolean>) TestDataManager.getSection("checkboxes").get("initialStates");
     }
 
     @Test
     public void verifyInitialCheckboxStates() {
         // Verify the initial state of the checkboxes
-        Assert.assertFalse(checkboxPage.isCheckboxChecked(0),
-                "Checkbox 1 should be unchecked by default.");
-        Assert.assertTrue(checkboxPage.isCheckboxChecked(1),
-                "Checkbox 2 should be checked by default.");
+        Assert.assertEquals(
+                checkboxPage.isCheckboxChecked(0),
+                initialStates.get(0),
+                "Checkbox 1 state mismatch."
+        );
+        Assert.assertEquals(
+                checkboxPage.isCheckboxChecked(1),
+                initialStates.get(1),
+                "Checkbox 2 state mismatch."
+        );
     }
 
     @Test
