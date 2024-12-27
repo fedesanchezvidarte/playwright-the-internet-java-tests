@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.CheckboxPage;
+import utils.Logger;
 import utils.SubPage;
 import utils.TestDataManager;
 
@@ -17,51 +18,77 @@ public class CheckboxTest extends BaseTest {
 
     @BeforeMethod
     public void navigateToCheckboxPage() {
+        Logger.info("Navigating to Checkboxes page...");
         navigateToPage(SubPage.CHECKBOXES);
         checkboxPage = getPageObject(CheckboxPage.class);
 
         // Load initial states for checkboxes
+        Logger.info("Loading initial checkbox states from test data...");
         initialStates = (List<Boolean>) TestDataManager.getSection("checkboxes").get("initialStates");
     }
 
     @Test
     public void verifyInitialCheckboxStates() {
-        // Verify the initial state of the checkboxes
-        Assert.assertEquals(
-                checkboxPage.isCheckboxChecked(0),
-                initialStates.get(0),
-                "Checkbox 1 state mismatch."
-        );
-        Assert.assertEquals(
-                checkboxPage.isCheckboxChecked(1),
-                initialStates.get(1),
-                "Checkbox 2 state mismatch."
-        );
+        Logger.info("Verifying initial checkbox states...");
+        try {
+            Assert.assertEquals(
+                    checkboxPage.isCheckboxChecked(0),
+                    initialStates.get(0),
+                    "Checkbox 1 state mismatch."
+            );
+            Logger.pass("Checkbox 1 state is correct.");
+
+            Assert.assertEquals(
+                    checkboxPage.isCheckboxChecked(1),
+                    initialStates.get(1),
+                    "Checkbox 2 state mismatch."
+            );
+            Logger.pass("Checkbox 2 state is correct.");
+        } catch (AssertionError e) {
+            Logger.fail("Failed to verify initial checkbox states: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Test
     public void checkAndUncheckCheckbox() {
-        // Check checkbox
-        int index = 0;
-        checkboxPage.checkCheckbox(index);
-        Assert.assertTrue(checkboxPage.isCheckboxChecked(index),
-                "Checkbox " + (index + 1) + "should be checked");
+        Logger.info("Checking and unchecking checkbox...");
+        try {
+            int index = 0;
 
-        // Uncheck checkbox
-        checkboxPage.unCheckCheckbox(index);
-        Assert.assertFalse(checkboxPage.isCheckboxChecked(index),
-                "Checkbox " + (index + 1) + "should be unchecked");
+            checkboxPage.checkCheckbox(index);
+            Assert.assertTrue(checkboxPage.isCheckboxChecked(index),
+                    "Checkbox " + (index + 1) + "should be checked");
+            Logger.pass("Checkbox " + (index + 1) + " was checked.");
+
+            checkboxPage.unCheckCheckbox(index);
+            Assert.assertFalse(checkboxPage.isCheckboxChecked(index),
+                    "Checkbox " + (index + 1) + "should be unchecked");
+            Logger.pass("Checkbox " + (index + 1) + " was unchecked.");
+        } catch (AssertionError e) {
+            Logger.fail("Failed to check/uncheck checkbox: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Test
     public void toggleCheckbox() {
-        // Toggle checkbox
-        int index = 1;
-        checkboxPage.toggleCheckbox(index);
-        Assert.assertFalse(checkboxPage.isCheckboxChecked(index), "Checkbox " + (index + 1) + " should be unchecked.");
+        Logger.info("Toggling checkbox...");
+        try {
+            int index = 1;
 
-        // Toggle Checkbox back
-        checkboxPage.toggleCheckbox(index);
-        Assert.assertTrue(checkboxPage.isCheckboxChecked(index), "Checkbox " + (index + 1) + " should be checked.");
+            checkboxPage.toggleCheckbox(index);
+            Assert.assertFalse(checkboxPage.isCheckboxChecked(index),
+                    "Checkbox " + (index + 1) + " should be unchecked.");
+            Logger.pass("Checkbox " + (index + 1) + " was toggled to unchecked.");
+
+            checkboxPage.toggleCheckbox(index);
+            Assert.assertTrue(checkboxPage.isCheckboxChecked(index),
+                    "Checkbox " + (index + 1) + " should be checked.");
+            Logger.pass("Checkbox " + (index + 1) + " was toggled back to checked.");
+        } catch (AssertionError e) {
+            Logger.fail("Failed to toggle checkbox: " + e.getMessage());
+            throw e;
+        }
     }
 }
