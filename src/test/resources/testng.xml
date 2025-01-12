@@ -2,17 +2,17 @@
 <suite name="Parallel Test Suite" parallel="tests" thread-count="3">
     <test name="AddRemoveElementsTest">
         <classes>
-            <class name="tests.AddRemoveElementsTest" />
+            <class name="tests.AddRemoveElementsTest"/>
         </classes>
     </test>
     <test name="CheckboxTest">
         <classes>
-            <class name="tests.CheckboxTest" />
+            <class name="tests.CheckboxTest"/>
         </classes>
     </test>
     <test name="DropdownTest">
         <classes>
-            <class name="tests.DropdownTest" />
+            <class name="tests.DropdownTest"/>
         </classes>
     </test>
 </suite>
