@@ -1,8 +1,0 @@
-<configuration>
-    <theme>dark</theme>
-    <encoding>utf-8</encoding>
-    <protocol>https</protocol>
-    <timelineEnabled>true</timelineEnabled>
-    <reportName>TestNG Automation Report</reportName>
-    <documentTitle>The-Internet | Automation Test Results</documentTitle>
-</configuration>
