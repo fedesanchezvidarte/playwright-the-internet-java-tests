@@ -103,4 +103,4 @@ If you'd like to contribute to the project, please fork the repository and submi
 ---
 
 ## Author
-Project developed by Federico Sánchez Vidarte
+Project developed by _Federico Sánchez Vidarte_
