@@ -28,7 +28,6 @@ public class BrokenImagesPage {
 
     public List<Integer> getBrokenImages() {
         List<Integer> brokenImages = new ArrayList<>();
-        Locator images = page.locator(IMAGE_SELECTOR);
 
         List<Boolean> brokenStatuses = (List<Boolean>) page.locator("img").evaluateAll(
                 "images => images.map(img => img.naturalWidth === 0)"
