@@ -12,6 +12,13 @@ public class Logger {
     }
 
     /**
+     * Logs a warning message.
+     * @param message The message to log.
+     */
+    public static void warn(String message) {
+        System.out.println("[WARN]: " + message);
+    }
+    /**
      * Logs an error message.
      *
      * @param message The message to log.
@@ -38,9 +45,6 @@ public class Logger {
      */
     public static void pass(String message) {
         System.out.println("[PASS]: " + message);
-//        if (ExtentReportManager.getTest() != null) {
-//            ExtentReportManager.getTest().log(Status.PASS, message);
-//        }
     }
 
     /**
@@ -50,8 +54,5 @@ public class Logger {
      */
     public static void fail(String message) {
         System.out.println("[FAIL]: " + message);
-//        if (ExtentReportManager.getTest() != null) {
-//            ExtentReportManager.getTest().log(Status.FAIL, message);
-//        }
     }
 }
