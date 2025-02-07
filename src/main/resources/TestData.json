@@ -4,10 +4,25 @@
     "numOfElementsToAdd": 20
   },
   "checkboxes": {
-    "initialStates": [false, true]
+    "initialStates": [
+      false,
+      true
+    ]
   },
   "dropdown": {
     "defaultValue": "Please select an option",
-    "options": ["Option 1", "Option 2"]
+    "options": [
+      "Option 1",
+      "Option 2"
+    ]
+  },
+  "formAuthentication": {
+    "validUsername": "tomsmith",
+    "validPassword": "SuperSecretPassword!",
+    "invalidUsername": "invalidUser",
+    "invalidPassword": "invalidPass",
+    "successMessage": "You logged into a secure area!",
+    "failureMessage": "Your username is invalid!",
+    "logoutMessage": "You logged out of the secure area!"
   }
 }
