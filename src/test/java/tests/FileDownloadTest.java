@@ -26,7 +26,7 @@ public class FileDownloadTest extends BaseTest {
         fileDownloadPage = getPageObject(FileDownloadPage.class);
 
         // Load test data
-        testData = TestDataManager.getSection("fileDownload");
+        testData = TestDataManager.getSection("fileDownload"); // considering the creation of more TCs based on file names/extensions
     }
 
     @Test
