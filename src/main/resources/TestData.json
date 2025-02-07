@@ -22,6 +22,9 @@
     "inputEnabledMessage": "It's enabled!",
     "inputDisabledMessage": "It's disabled!"
   },
+  "fileDownload": {
+    "downloadDirectory": "target/downloads"
+  },
   "fileUpload": {
     "validFilePath": "src/test/resources/testfile.txt",
     "validFileName": "testfile.txt"
