@@ -16,6 +16,12 @@
       "Option 2"
     ]
   },
+  "dynamicControls": {
+    "checkboxRemovedMessage": "It's gone!",
+    "checkboxAddedMessage": "It's back!",
+    "inputEnabledMessage": "It's enabled!",
+    "inputDisabledMessage": "It's disabled!"
+  },
   "formAuthentication": {
     "validUsername": "tomsmith",
     "validPassword": "SuperSecretPassword!",

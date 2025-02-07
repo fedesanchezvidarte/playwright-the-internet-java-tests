@@ -2,6 +2,9 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
+/**
+ * Page Object Model for the Checkbox page.
+ */
 public class CheckboxPage {
 
     private final Page page;

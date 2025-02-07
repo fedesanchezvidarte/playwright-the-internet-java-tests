@@ -2,6 +2,9 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
+/**
+ * Page Object Model for the Dropdown page.
+ */
 public class DropdownPage {
 
     private final Page page;

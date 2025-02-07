@@ -5,6 +5,9 @@ import com.microsoft.playwright.Page;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Page Object Model for the BrokenImagesPage page.
+ */
 public class BrokenImagesPage {
 
     private final Page page;

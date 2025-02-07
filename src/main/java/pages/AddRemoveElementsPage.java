@@ -2,6 +2,9 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
+/**
+ * Page Object Model for the AddRemoveElementsPage page.
+ */
 public class AddRemoveElementsPage {
 
     private final Page page;

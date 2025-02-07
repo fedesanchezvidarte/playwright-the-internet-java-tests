@@ -2,6 +2,9 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
+/**
+ * Page Object Model for the Form Authentication page.
+ */
 public class FormAuthenticationPage {
 
     private final Page page;
