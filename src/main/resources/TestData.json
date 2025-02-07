@@ -22,6 +22,10 @@
     "inputEnabledMessage": "It's enabled!",
     "inputDisabledMessage": "It's disabled!"
   },
+  "fileUpload": {
+    "validFilePath": "src/test/resources/testfile.txt",
+    "validFileName": "testfile.txt"
+  },
   "formAuthentication": {
     "validUsername": "tomsmith",
     "validPassword": "SuperSecretPassword!",
