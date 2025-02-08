@@ -30,28 +30,23 @@ public class AddRemoveElementsTest extends BaseTest {
     @Test
     public void verifyInitialPageLoad() {
         Logger.info("Verifying initial page load...");
-        try {
-            boolean isAddElementVisible = addRemoveElementsPage.isAddElementButtonVisible();
 
-            Assert.assertTrue(isAddElementVisible,
-                    "'Add Element' button should be visible on page load.");
-            Logger.pass("'Add Element' button is visible on page load.");
-        } catch (AssertionError e) {
-            Logger.fail("Failed to verify initial page load: " + e.getMessage());
-            throw e;
-        }
+        boolean isAddElementVisible = addRemoveElementsPage.isAddElementButtonVisible();
+        Assert.assertTrue(isAddElementVisible, "'Add Element' button should be visible on page load.");
+
+        Logger.pass("'Add Element' button is visible on page load.");
     }
 
     @Test
     public void addRemoveSingleElement() {
         Logger.info("Adding and removing a single element...");
-        try {
-            // Click on "Add Element"
-            addRemoveElementsPage.clickAddElementButton();
 
-            // Verify one "Delete" button appears
-            int deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
-            int initialCount = (int) testData.get("initialCount");
+        // Click on "Add Element"
+        addRemoveElementsPage.clickAddElementButton();
+
+        // Verify one "Delete" button appears
+        int deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
+        int initialCount = (int) testData.get("initialCount");
 
             Assert.assertEquals(
                     deleteButtonCount,
@@ -59,57 +54,50 @@ public class AddRemoveElementsTest extends BaseTest {
                     "There should be exactly 1 'Delete' button.");
             Logger.pass("Verified 1 'Delete' button appears after adding.");
 
-            // Remove the "Delete" button
-            addRemoveElementsPage.clickFirstDeleteButton();
+        // Remove the "Delete" button
+        addRemoveElementsPage.clickFirstDeleteButton();
 
-            // Verify no "Delete" buttons remain
-            deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
+        // Verify no "Delete" buttons remain
+        deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
+        Assert.assertEquals(
+                deleteButtonCount,
+                initialCount,
+                "There should not be 'Delete' buttons after removal.");
 
-            Assert.assertEquals(
-                    deleteButtonCount,
-                    initialCount,
-                    "There should not be 'Delete' buttons after removal.");
-            Logger.pass("Verified 'Delete' button is removed successfully.");
-        } catch (AssertionError e) {
-            Logger.fail("Failed to add/remove single element: " + e.getMessage());
-            throw e;
-        }
+        Logger.pass("Verified 'Delete' button is removed successfully.");
     }
 
     @Test
     public void addRemoveMultipleElements() {
         Logger.info("Adding and removing multiple elements...");
-        try {
-            // Click on "Add Element" multiple times
-            int numOfElements = (int) testData.get("numOfElementsToAdd");
-            for (int i = 0; i < numOfElements; i++) {
-                addRemoveElementsPage.clickAddElementButton();
-            }
 
-            // Verify number of "Delete" buttons
-            int deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
-
-            Assert.assertEquals(
-                    deleteButtonCount,
-                    numOfElements,
-                    "There should be exactly " + numOfElements + " delete buttons.");
-            Logger.pass("Verified " + numOfElements + " 'Delete' buttons are present.");
-
-            // Remove all 'Delete' buttons
-            addRemoveElementsPage.removeAllDeleteButtons();
-
-            // Verify no "Delete" buttons remain
-            deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
-            int initialCount = (int) testData.get("initialCount");
-
-            Assert.assertEquals(
-                    deleteButtonCount,
-                    initialCount,
-                    "There should not be 'Delete' buttons after removal.");
-            Logger.pass("Verified all 'Delete' buttons are removed successfully.");
-        } catch (AssertionError e) {
-            Logger.fail("Failed to add/remove multiple elements: " + e.getMessage());
-            throw e;
+        // Click on "Add Element" multiple times
+        int numOfElements = (int) testData.get("numOfElementsToAdd");
+        for (int i = 0; i < numOfElements; i++) {
+            addRemoveElementsPage.clickAddElementButton();
         }
+
+        // Verify number of "Delete" buttons
+        int deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
+        Assert.assertEquals(
+                deleteButtonCount,
+                numOfElements,
+                "There should be exactly " + numOfElements + " delete buttons.");
+
+        Logger.pass("Verified " + numOfElements + " 'Delete' buttons are present.");
+
+        // Remove all 'Delete' buttons
+        addRemoveElementsPage.removeAllDeleteButtons();
+
+        // Verify no "Delete" buttons remain
+        deleteButtonCount = addRemoveElementsPage.getDeleteButtonCount();
+        int initialCount = (int) testData.get("initialCount");
+
+        Assert.assertEquals(
+                deleteButtonCount,
+                initialCount,
+                "There should not be 'Delete' buttons after removal.");
+
+        Logger.pass("Verified all 'Delete' buttons are removed successfully.");
     }
 }

@@ -30,65 +30,53 @@ public class CheckboxTest extends BaseTest {
     @Test
     public void verifyInitialCheckboxStates() {
         Logger.info("Verifying initial checkbox states...");
-        try {
-            Assert.assertEquals(
-                    checkboxPage.isCheckboxChecked(0),
-                    initialStates.get(0),
-                    "Checkbox 1 state mismatch."
-            );
-            Logger.pass("Checkbox 1 state is correct.");
 
-            Assert.assertEquals(
-                    checkboxPage.isCheckboxChecked(1),
-                    initialStates.get(1),
-                    "Checkbox 2 state mismatch."
-            );
-            Logger.pass("Checkbox 2 state is correct.");
-        } catch (AssertionError e) {
-            Logger.fail("Failed to verify initial checkbox states: " + e.getMessage());
-            throw e;
-        }
+        Assert.assertEquals(
+                checkboxPage.isCheckboxChecked(0),
+                initialStates.get(0),
+                "Checkbox 1 state mismatch."
+        );
+        Logger.pass("Checkbox 1 state is correct.");
+
+        Assert.assertEquals(
+                checkboxPage.isCheckboxChecked(1),
+                initialStates.get(1),
+                "Checkbox 2 state mismatch."
+        );
+        Logger.pass("Checkbox 2 state is correct.");
     }
 
     @Test
     public void checkAndUncheckCheckbox() {
         Logger.info("Checking and unchecking checkbox...");
-        try {
-            int index = 0;
 
-            checkboxPage.checkCheckbox(index);
-            Assert.assertTrue(checkboxPage.isCheckboxChecked(index),
-                    "Checkbox " + (index + 1) + "should be checked");
-            Logger.pass("Checkbox " + (index + 1) + " was checked.");
+        int index = 0;
 
-            checkboxPage.unCheckCheckbox(index);
-            Assert.assertFalse(checkboxPage.isCheckboxChecked(index),
-                    "Checkbox " + (index + 1) + "should be unchecked");
-            Logger.pass("Checkbox " + (index + 1) + " was unchecked.");
-        } catch (AssertionError e) {
-            Logger.fail("Failed to check/uncheck checkbox: " + e.getMessage());
-            throw e;
-        }
+        checkboxPage.checkCheckbox(index);
+        Assert.assertTrue(checkboxPage.isCheckboxChecked(index),
+                "Checkbox " + (index + 1) + " should be checked");
+        Logger.pass("Checkbox " + (index + 1) + " was checked.");
+
+        checkboxPage.unCheckCheckbox(index);
+        Assert.assertFalse(checkboxPage.isCheckboxChecked(index),
+                "Checkbox " + (index + 1) + " should be unchecked");
+        Logger.pass("Checkbox " + (index + 1) + " was unchecked.");
     }
 
     @Test
     public void toggleCheckbox() {
         Logger.info("Toggling checkbox...");
-        try {
-            int index = 1;
 
-            checkboxPage.toggleCheckbox(index);
-            Assert.assertFalse(checkboxPage.isCheckboxChecked(index),
-                    "Checkbox " + (index + 1) + " should be unchecked.");
-            Logger.pass("Checkbox " + (index + 1) + " was toggled to unchecked.");
+        int index = 1;
 
-            checkboxPage.toggleCheckbox(index);
-            Assert.assertTrue(checkboxPage.isCheckboxChecked(index),
-                    "Checkbox " + (index + 1) + " should be checked.");
-            Logger.pass("Checkbox " + (index + 1) + " was toggled back to checked.");
-        } catch (AssertionError e) {
-            Logger.fail("Failed to toggle checkbox: " + e.getMessage());
-            throw e;
-        }
+        checkboxPage.toggleCheckbox(index);
+        Assert.assertFalse(checkboxPage.isCheckboxChecked(index),
+                "Checkbox " + (index + 1) + " should be unchecked.");
+        Logger.pass("Checkbox " + (index + 1) + " was toggled to unchecked.");
+
+        checkboxPage.toggleCheckbox(index);
+        Assert.assertTrue(checkboxPage.isCheckboxChecked(index),
+                "Checkbox " + (index + 1) + " should be checked.");
+        Logger.pass("Checkbox " + (index + 1) + " was toggled back to checked.");
     }
 }
