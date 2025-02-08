@@ -48,6 +48,31 @@ public class HoversTest extends BaseTest {
         }
     }
 
+    @Test // Example validation
+    public void verifyCaptionsContainCorrectUsernames() {
+        Logger.info("Verifying captions contain correct usernames...");
+
+        int avatarCount = hoversPage.getUserAvatarCount();
+        Assert.assertTrue(avatarCount > 0, "No user avatars found.");
+
+        for (int i = 0; i < avatarCount; i++) {
+            Logger.info("Hovering over user " + (i + 1) + "...");
+            hoversPage.hoverOverUser(i);
+
+            Assert.assertTrue(hoversPage.isCaptionVisible(i),
+                    "Caption should be visible for user " + (i + 1));
+
+            String profileName = hoversPage.getProfileName(i);
+            Logger.info("Extracted profile name:\n" + profileName);
+
+            Assert.assertFalse(profileName.isEmpty(), "Profile name should not be empty.");
+            Assert.assertTrue(profileName.contains("user"), "Profile name should contain 'user'."); // Example validation
+
+            Logger.pass("Profile name extracted and validated for user " + (i + 1) + ".");
+        }
+    }
+
+
     @Test
     public void verifyProfileLinksAreClickable() {
         Logger.info("Verifying profile links are clickable...");
