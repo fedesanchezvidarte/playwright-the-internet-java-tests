@@ -72,6 +72,7 @@ public class BaseTest {
         if (localContext != null) {
             if (shouldSaveTrace) {
                 Logger.info("Saving trace for debugging...");
+                Logger.info("Trace can be manually opened on https://trace.playwright.dev");
                 localContext.tracing().stop(new Tracing.StopOptions()
                         .setPath(Paths.get("target/trace/trace.zip")));
             } else {
