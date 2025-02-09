@@ -37,5 +37,15 @@
     "successMessage": "You logged into a secure area!",
     "failureMessage": "Your username is invalid!",
     "logoutMessage": "You logged out of the secure area!"
+  },
+  "keyPresses": {
+    "keys": {
+      "Enter": "You entered: ENTER",
+      "Backspace": "You entered: BACK_SPACE",
+      "Escape": "You entered: ESCAPE",
+      "Space": "You entered: SPACE",
+      "Shift": "You entered: SHIFT",
+      "Tab": "You entered: TAB"
+    }
   }
 }
