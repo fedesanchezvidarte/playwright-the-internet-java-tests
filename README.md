@@ -84,7 +84,7 @@ debugMode=true
 ### Running from the Terminal
 You can run all the tests using Maven:
 ```mvn test```
-To rn a specific test suite defined in testng.xml:
+To run a specific test suite defined in testng.xml:
 ```mvn test -DsuiteXmlFile=src/test/resources/testng.xml```
 
 ---
