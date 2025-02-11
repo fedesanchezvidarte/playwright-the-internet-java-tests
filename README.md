@@ -24,7 +24,6 @@ src
 │   │   │   ├── FrameworkConfig.java
 │   │   │   ├── Logger.java
 │   │   │   ├── SubPage.java
-│   │   │   ├── TestData.java
 │   │   │   └── TestDataManager.java
 │   └── resources
 │       ├── config.properties               # Framework configuration
@@ -42,7 +41,7 @@ src
 
 ---
 
-## Technologes and Tools
+## Technologies and Tools
 * Java 17: Primary programming language.
 * Playwright: Library for web application testing.
 * TestNG: Testing framework for organizing and executing test cases.
