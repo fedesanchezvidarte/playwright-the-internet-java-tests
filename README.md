@@ -90,10 +90,10 @@ To run a specific test suite defined in testng.xml:
 ---
 
 ## Next Steps
-* Add more test cases to cover all subpages of The Internet.
-* Implement custom reporting (e.g., with Extent Reports).
-* Enable parallel executions using TestNG and Maven.
-* Document class APIs using Javadoc.
+* [ ] Add more test cases to cover all subpages of The Internet. 🧪
+* [ ] Implement custom reporting (e.g., with Extent Reports). 📂
+* [x] Enable parallel executions using TestNG and Maven. 🎉
+* [ ] Document class APIs using Javadoc. 📎
 
 ---
 
